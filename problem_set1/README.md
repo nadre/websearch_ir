@@ -117,10 +117,32 @@ We basically have four ideas to do this:
 Depending on the implementation the SE would have to get information from the index, feature store or has to analyze the document from document store.
 
 ##Exercise 5 : Crawling
-###What are some reasons for building a search engine for only the small collection?
+What are some reasons for building a search engine for only the small collection?
 * Small indexes are much faster.
 
-###What are some reasons for building a search engine that covers both collections?
+What are some reasons for building a search engine that covers both collections?
 * Every indexed document at least answers the question: "Where is this document?"
 * Every document indexed increases number of answerable questions
 * The task of seperating good from bad documents is the job of the ranking algorithm
+
+##Exercise 6 : Crawling
+* Suppose you have a network connection that can transfer 10MB per second. If each web page is 10K and requires 500 milliseconds to transfer, how many threads does your web crawler need to fully utilize the network connection?
+
+	10MB / 10K = 1K Threads
+
+* If your crawler needs to wait 10 seconds between requests to the same web server, what is the minimum number of distinct web servers the system needs to contact each minute to keep the network connection fully utilized?
+	
+	The crawler would like to send the next request after 0.5s, due to politeness he needs to wait 9.5s to request the same server again.
+	To keep all the 1K threads busy, there should be at least 20K distinct servers.
+
+##Exercise 7 : Crawling
+Why do crawlers not use POST requests?
+* Due to politeness?
+
+##Exercise 8 : Crawling
+How would you design a system to automatically enter data into web forms in order to crawl deep web pages? What measures would you use to make sure your crawler’s actions were not destructive (for instance, so that it doesn’t add random blog comments)?
+
+
+##Exercise 9 : Crawling
+Suppose that, in an effort to crawl web pages faster, you set up two crawling machines with different starting seed URLs. Is this an effective strategy for distributed crawling? Why or why not?
+* With high probability the nodes of would be close to each other and soon the crawler would start to crawl the same pages. This is why we need a common frontier where each crawler gets his jobs from.
