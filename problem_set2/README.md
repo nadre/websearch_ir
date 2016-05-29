@@ -7,7 +7,7 @@ Plot the document slope curves for a sample of web pages.
 Test the accuracy of the simple optimization algorithm for detecting the main
 content block.
 
-![Webis](/dls/http:www.uni-weimar.deenmediachairswebishome.png)
+![Webis](dls/http:www.uni-weimar.deenmediachairswebishome.png)
 
 
 See "dls" folder for more examples.
