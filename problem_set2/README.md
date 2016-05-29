@@ -29,3 +29,6 @@ See "dls" folder for more examples.
 3. sha1sum
     Like cksum but even harder to forge.
     
+###Exercise 3 : Storing
+
+###Exercise 4 : Storing
