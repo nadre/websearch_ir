@@ -9,6 +9,15 @@ content block.
 
 ![Webis](dls/http:www.uni-weimar.deenmediachairswebishome.png)
 
+![CNN](dls/http:edition.cnn.com.png)
+
+![CNN Article](dls/http:edition.cnn.com20160528footballreal-madrid-champions-league-atleticoindex.html.png)
+
+http://edition.cnn.com/2016/05/28/football/real-madrid-champions-league-atletico/index.html
+
+![BBC Article](dls/http:www.bbc.comcapitalstory20160523-the-350000-mile-a-year-life-suitcases-and-culture-shock.png)
+
+http://www.bbc.com/capital/story/20160523-the-350000-mile-a-year-life-suitcases-and-culture-shock
 
 See "dls" folder for more examples.
 
