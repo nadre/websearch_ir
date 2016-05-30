@@ -31,4 +31,15 @@ See "dls" folder for more examples.
     
 ###Exercise 3 : Storing
 
-###Exercise 4 : Storing
+###Exercise 4 : Zipf
+![Dorian Gray](text/dorian_gray.txt.png)
+    the 3942  |    of  2298  |    and 2258  |    to  2117  |    a   1725  |    i   1676  |    he  1532  |    you 1504  |    that    1351  |    it  1348  |    in  1263  |    was 1077  |    his 992  |    is  931  |    had 827  |    with    706  |    him 653  |    for 610  |    as  582  |    at  572  |
+
+![Dorian Gray Ger](text/dorian_gray_ger.txt.png)
+    und 2273    |    die 1929    |    er  1560    |    der 1432    |    ich 1325    |    sie 1231    |    in  1163    |    das 1109    |    zu  1009    |    es  978 |    nicht   864  |    ein 767   |    war 732    |    den 732 |    du  727  |    ist 684   |    mit 673    |    sich    633 |    von 584  |    auf 558   |
+
+![Faust](text/faust.txt.png)
+    the 941 |    and 729  |    of  590   |    to  481    |    faustus 438 |    i   378  |    in  366   |    a   321    |    so  301 |    that    272  |    footnote    268   |    you 249    |    this    242 |    with    216  |    for 207   |    is  199    |    me  192 |    1624    186  |    my  183   |    his 180    |
+
+![Faust Ger](text/faust_ger.txt.png)
+    und 918 |    ich 691  |    die 668   |    der 610    |    nicht   426 |    das 403  |    ein 399   |    zu  380    |    in  365 |    ist 363  |    du  312   |    sie 300    |    es  297 |    so  293  |    mephistopheles  283   |    den 277    |    mit 274 |    faust   272  |    sich    262   |    ihr 255    |
