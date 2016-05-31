@@ -30,6 +30,24 @@ See "dls" folder for more examples.
     Like cksum but even harder to forge.
     
 ###Exercise 3 : Storing
+Write a program to generate fingerprints for documents.
+Report on the accuracy of the detection (precision and recall of the approach).
+
+	md5_sum dups
+	precision: 85.714286 recall: 15.929204
+
+	simhash3 dups
+	precision: 85.294118 recall: 26.126126
+
+	simhash3 near dups with hamming distance thres 11
+	precision: 81.632653 recall: 37.383178
+
+	simhash5 near dups with hamming distance thres 11
+	precision: 85.000000 recall: 30.909091
+	
+	simhash7 near dups with hamming distance thres 11
+	precision: 88.571429 recall: 27.678571
+
 
 ###Exercise 4 : Zipf
 ![Dorian Gray](text/dorian_gray.txt.png)

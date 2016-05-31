@@ -31,7 +31,8 @@ def find_near_duplicates(tuples, thres):
 			d = distance.hamming(h1, h2)
 			if d < thres:
 				dups.append((x[0], y[0]))
-	return dups
+	
+	return list_of_dups_to_dict(dups)
 
 def find_duplicates_with_same_hash(hash_fn):
 	hmap = {}
@@ -41,12 +42,22 @@ def find_duplicates_with_same_hash(hash_fn):
 		for text in duplicate_texts:
 			h = hash_fn(text)
 			if h in hmap:
-				hmap[h].append(idx)
+				hmap[h].append(str(idx))
 			else:
-				hmap[h] = [idx]
+				hmap[h] = [str(idx)]
 			idx += 1
 
-	return [x for x in hmap.values() if len(x) > 1]
+	dups_list = [x for x in hmap.values() if len(x) > 1]
+
+	return list_of_dups_to_dict(dups_list)
+
+def list_of_dups_to_dict(dups_list):
+	dups = []
+	for entry in dups_list:
+		dups.extend(list(itertools.combinations(entry, 2)))
+
+	return dict(dups)
+
 
 def get_tuples(hash_fn):
 	tuples = []
@@ -69,6 +80,12 @@ def md5_sum(x):
 def simhash3(x, width = 3):
 	return Simhash(get_features(x, width)).value
 
+def simhash5(x, width = 5):
+	return Simhash(get_features(x, width)).value
+
+def simhash7(x, width = 7):
+	return Simhash(get_features(x, width)).value
+
 def get_matches():
 	matches = {}
 	with open(correct_matches_path) as f:
@@ -79,40 +96,46 @@ def get_matches():
 	return matches
 
 def evaluate(matches, dups_dict):
-	hit = 0
-	miss = 0
-	false_hit = 0
+	true_pos = 0
+	false_neg = 0
+	false_pos = 0
 	for key in matches:
-		print(key)
-		if(key in dups_dict):
+		if(str(key) in dups_dict):
 			if matches[key] == dups_dict[key]:
-				hit += 1
+				true_pos += 1
 			else:
-				false_hit += 1
+				false_pos += 1
 		else:
-			miss += 1
-	print(hit, false_hit, miss)	
+			false_neg += 1
+
+	print('precision: {:2f} recall: {:2f}'
+		.format(
+			true_pos/(true_pos+false_pos)*100,
+			true_pos/(true_pos+false_neg)*100))	
 
 if __name__ == '__main__':
 
 	matches = get_matches()
 
 	md5_sum_dups = find_duplicates_with_same_hash(md5_sum)
+	print('md5_sum dups')
+	evaluate(matches, md5_sum_dups)
 
-	dups = []
-	for entry in md5_sum_dups:
-		dups.extend(list(itertools.combinations(entry, 2)))
+	simhash3_dups = find_duplicates_with_same_hash(simhash3)
+	print('simhash3 dups')
+	evaluate(matches, simhash3_dups)
 
-	dups_dict = dict(dups)
+	tuples = get_tuples(simhash3)
+	simhash3_near_dups = find_near_duplicates(tuples, 11)
+	print('simhash3 near dups with hamming distance thres 11')
+	evaluate(matches, simhash3_near_dups)
 
-	print(dups_dict)
+	tuples = get_tuples(simhash5)
+	simhash5_near_dups = find_near_duplicates(tuples, 11)
+	print('simhash5 near dups with hamming distance thres 11')
+	evaluate(matches, simhash5_near_dups)
 
-	evaluate(matches, dups_dict)
-
-	# print(len(find_duplicates_with_same_hash(simhash3))
-
-	# tuples = get_tuples(simhash3)
-	# print(len(find_near_duplicates(tuples, 9))))
-
-
-
+	tuples = get_tuples(simhash7)
+	simhash7_near_dups = find_near_duplicates(tuples, 11)
+	print('simhash7 near dups with hamming distance thres 11')
+	evaluate(matches, simhash7_near_dups)
