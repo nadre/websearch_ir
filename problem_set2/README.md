@@ -44,7 +44,7 @@ Report on the accuracy of the detection (precision and recall of the approach).
 
 	simhash5 near dups with hamming distance thres 11
 	precision: 85.000000 recall: 30.909091
-	
+
 	simhash7 near dups with hamming distance thres 11
 	precision: 88.571429 recall: 27.678571
 
@@ -61,3 +61,40 @@ Report on the accuracy of the detection (precision and recall of the approach).
 
 ![Faust Ger](text/faust_ger.txt.png)
     und 918 |    ich 691  |    die 668   |    der 610    |    nicht   426 |    das 403  |    ein 399   |    zu  380    |    in  365 |    ist 363  |    du  312   |    sie 300    |    es  297 |    so  293  |    mephistopheles  283   |    den 277    |    mit 274 |    faust   272  |    sich    262   |    ihr 255    |
+
+###Exercise 5 : 
+
+###Exercise 6 : Stopping
+Examine an English stop word list you find on the web. List 10 words that you think would cause problems
+for some queries. Give examples of these problems.
+
+	I	|	a	|	about	|	an	|	are	|	as	|	at	|	be	|	by	|	com	|	for	|	fro	|	ho	|	in	|	is	|	it	|	of	|	on	|	or	|	tha	|	the	|	thi	|	to	|	was	|	what	|	when	|	where	|	who	|	will	|	with	|	the	|	www	|
+
+####Problems:
+ - Stopword is part of a title or a known phrase: "The Matrix", "to be or not to be"
+ - Stopwords give additional information, if they are removed, the meaning is changed: "A man on fire" -> "man fire"
+
+###Exercise 7 : Stemming
+#### Porter
+ - Uses heuristically developed rules to produce "stems", not readable word snippets which can lead to false positives like:
+ 	***ignore/ignorant*** 
+ and false negatives like:
+ 	***matrices/matrix***
+#### Krovetz
+ - Uses a dictionary to look up words of the same family, this way the word stays readable and false postive stays low.
+
+###Exercise 8 : Text processing
+For each of the following techniques, give an example, a new idea, or a new challenge which shows how
+the technique can contribute in information retrieval:
+
+ - Language modeling (n-gram probabilities)
+ - Machine translation
+ - Named entity recognition
+ - Parsing
+ - Part of speech tagging
+ - Relationship extraction
+ - Stemming
+ - Spell correction
+ - Summarization
+ - Text categorization
+ - Word sense disambiguation
