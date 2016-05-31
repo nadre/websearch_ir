@@ -3,6 +3,7 @@
 import hashlib
 import re
 import distance
+import itertools
 from simhash import Simhash, SimhashIndex
 
 # inspiration: https://leons.im/posts/a-python-implementation-of-simhash-algorithm/
@@ -68,17 +69,50 @@ def md5_sum(x):
 def simhash3(x, width = 3):
 	return Simhash(get_features(x, width)).value
 
-if __name__ == '__main__':
-	print(find_duplicates_with_same_hash(md5_sum))
-	print(find_duplicates_with_same_hash(simhash3))
-
-	tuples = get_tuples(simhash3)
-	print(find_near_duplicates(tuples, 13))
-
-	matches = []
+def get_matches():
+	matches = {}
 	with open(correct_matches_path) as f:
 		correct_matches = f.readlines()
 		for match in correct_matches:
 			match = match.split()
-			matches.append((match[0], match[1]))
-			
+			matches[match[0]] = match[1]
+	return matches
+
+def evaluate(matches, dups_dict):
+	hit = 0
+	miss = 0
+	false_hit = 0
+	for key in matches:
+		print(key)
+		if(key in dups_dict):
+			if matches[key] == dups_dict[key]:
+				hit += 1
+			else:
+				false_hit += 1
+		else:
+			miss += 1
+	print(hit, false_hit, miss)	
+
+if __name__ == '__main__':
+
+	matches = get_matches()
+
+	md5_sum_dups = find_duplicates_with_same_hash(md5_sum)
+
+	dups = []
+	for entry in md5_sum_dups:
+		dups.extend(list(itertools.combinations(entry, 2)))
+
+	dups_dict = dict(dups)
+
+	print(dups_dict)
+
+	evaluate(matches, dups_dict)
+
+	# print(len(find_duplicates_with_same_hash(simhash3))
+
+	# tuples = get_tuples(simhash3)
+	# print(len(find_near_duplicates(tuples, 9))))
+
+
+
