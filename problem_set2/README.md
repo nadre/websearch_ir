@@ -86,15 +86,25 @@ for some queries. Give examples of these problems.
 ###Exercise 8 : Text processing
 For each of the following techniques, give an example, a new idea, or a new challenge which shows how
 the technique can contribute in information retrieval:
-
  - Language modeling (n-gram probabilities)
+ Detecting stopwords and phrases
  - Machine translation
+ Like stemming but for different languages
  - Named entity recognition
+ Not removing stopwords from titles
  - Parsing
+ ?
  - Part of speech tagging
+ Detect keynounphrases
  - Relationship extraction
+ Find relevant documents that are related
  - Stemming
+ Extending search results
  - Spell correction
+ Helping user with false input
  - Summarization
+ Search result snippets
  - Text categorization
+ Structure search results in different categories
  - Word sense disambiguation
+ Identifying the context the user is interested in (Jaguar: Car?  Animal?)
