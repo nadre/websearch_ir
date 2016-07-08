@@ -373,12 +373,12 @@ Challenges:
 
 #### The crawling process
 
-1) Start with a set of seed URLs
-2) URLs are added to request queue (also called frontier)
-3) Crawler starts fetching URLs from queue
-4) Identifying links on downloaded pages
-5) New URLs are added to frontier
-6) Repeat until frontier empty (or disk full)
+1. Start with a set of seed URLs
+2. URLs are added to request queue (also called frontier)
+3. Crawler starts fetching URLs from queue
+4. Identifying links on downloaded pages
+5. New URLs are added to frontier
+6. Repeat until frontier empty (or disk full)
 
 - Single thread is not efficent
 	Most of time would be spent waiting for the DNS and building up the connection
@@ -507,6 +507,87 @@ __Example__:
 - Update
 
 ### Large files
+
+- Store many documents in combined large files, rather than each document in individual small files
+	- Reduces file open/close overhead
+	- Reduces seek time to read time
+
+- Compoung document formats
+	- Store multiple documents in one file (Trec Web, WARC)
+
+### Compression
+
+- Text is very redundant
+- Compression uses the redundancy to losless reduce file space
+- HTML can be commpressed by 80%
+
+### Big Table (Google)
+
+__Info:__
+
+- Distributed database system (storing, finding, updating)
+- Handles large collection with cheap computer
+- One instance can cover over a petabyte
+- Table is split into small pieces: tablets
+- No query language -> no complex queries to optimize
+- Only row level interaticons
+- Tablets are replicated over a shared all access file system
+- Changes are also in the shared file system
+- If a tablet crashes, another server can take over by fetching it's data and transaction log
+
+__Logic:__
+
+- Logically organized in rows
+- One row stores data for one web page
+- Cell access through: (row key, column key, timestamp)
+- A row can have a huge number of columns
+- Rows have the same columns groups but not necessarily the same columns
+- TODO: Important for reducing disk reads to access document data ?
+- Rows are partioned into tablets by their keys
+
+### Detecting Duplicates
+
+- 30% of the web pages in a large crawl are exact or near duplicates of pages in the other 70%
+- Duplicates consume resources but add little value to the use
+- Exact duplicate detection is easy
+	- Checksum: Add up bytes of the chars (different text may have same checksum)
+	- Cyclic redundancy check (CRC) considers the positions of the bytes
+
+### Near-Duplicate Detection
+
+- More complex. More philosophical:
+	- Are web pages with same text content but different advertising or format near-duplicates?
+- Defined by a threshold value for some similarity measdure between a pair of documents:
+	- Example: d1 near duplicate of d2 if > 90% of the words are the same
+- Search scenario
+	- Given document d, find near duplicates in collection ~ O(n) comparisons
+	- IR techniques are effective
+- Discovery scenario
+	- Given a collection, find all near duplicate pairs ~ O(n²) comparisons
+	- Fingerprinting is effective
+
+#### Fingerprinting
+
+1. Parse doc into words (strip non-word content)
+2. Group words into n-grams (usually overlapping)
+3. Select some n-grams to represent
+4. Hash selected n-grams
+5. Store hash values in index
+6. Compare documents by overlap of fingerprints
+
+__In Practise:__
+
+- Finding web near-duplicates usually uses 5–10-grams with 64bit hashes
+- Fingerprinting as candidate retrieval and deeper analysis with cosine similarity
+- Simhash combines effectiveness of word-based similarity with efficiency of fingerprinting
+
+#### Simhash
+
+1. Document d -> feature set with weights (e.g. words with their frequencies)
+
+
+
+
 
 
 ## Parsing Documents
